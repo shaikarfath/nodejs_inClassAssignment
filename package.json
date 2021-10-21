@@ -1,0 +1,19 @@
+{
+  "name": "nodejs_inclassassignment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaikarfath/nodejs_inClassAssignment.git"
+  },
+  "author": "Arfath Shaik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shaikarfath/nodejs_inClassAssignment/issues"
+  },
+  "homepage": "https://github.com/shaikarfath/nodejs_inClassAssignment#readme"
+}
