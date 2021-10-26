@@ -1,12 +1,15 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 
+var tasks = [];
+var completed = [];
+
 var app= express();
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended : true}));
 
 app.get('/', function(request, response){
-    response.render('index');
+    response.render('index', {tasks:tasks , completed: completed});
     //response.send('Hello World!');
 });
 
