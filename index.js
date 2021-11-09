@@ -17,12 +17,28 @@ let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB Connection error:  '))
 //Connection to MongoDB
 
-let tasks = ['wake up', 'eat breakfast', 'brs'];
+let tasks = [];
 let completed = [];
 
 
 app.get('/', function(request, response){
-    response.render('index', {tasks: tasks , completed: completed});
+    ToDo.find(function(err, todo){
+        if(err){
+            console.log(err);
+        } else {
+            tasks = [];
+            completed = [];
+            for(let i =0; i< todo.length; i++){
+                if(todo[i].done){
+                    completed.push(todo[i]);
+                } else {
+                    tasks.push(todo[i]);
+                }
+            }
+            response.render('index', {tasks: tasks , completed: completed});
+        }
+    })
+    //response.render('index', {tasks: tasks , completed: completed});
     //response.send('Hello World!');
 });
 
@@ -58,13 +74,23 @@ app.post('/removeToDo', function(req,res){
         // completed.push(remove);
     } else if(typeof remove === "object"){
         for(var i=0; i<remove.length; i++){
-            tasks.splice( tasks.indexOf(remove[i]),1);
-            completed.push(remove[i]);
+            ToDo.updateOne({item:remove[i]}, {done:true}, function(err){
+                if(err){
+                    console.log(err);
+                } else {
+                    res.redirect('/');
+                }
+            })
         }
-        res.redirect('/')
     }
+        //     tasks.splice( tasks.indexOf(remove[i]),1);
+        //     completed.push(remove[i]);
+        // }
+        // res.redirect('/')
+    // }
     
 })
+
 
 app.post('/deleteToDo', function(req,res){
     const deleteTask = req.body.delete;
