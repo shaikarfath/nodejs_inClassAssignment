@@ -20,7 +20,7 @@ db.on('error', console.error.bind(console, 'MongoDB Connection error:  '))
 let tasks = [];
 let completed = [];
 
-
+// fetch method
 app.get('/', function(request, response){
     ToDo.find(function(err, todo){
         if(err){
@@ -42,6 +42,8 @@ app.get('/', function(request, response){
     //response.send('Hello World!');
 });
 
+
+// create method on database
 app.post('/addToDo', function(req, res){
     let newTodo = new ToDo({
         item: req.body.newtodo,
@@ -59,11 +61,13 @@ app.post('/addToDo', function(req, res){
     //res.redirect('/');
 })
 
+
+// update method
 app.post('/removeToDo', function(req,res){
     const remove = req.body.check;
   
     if(typeof remove === 'string'){
-        ToDo.updateOne({item:remove}, {done:true}, function(err){
+        ToDo.updateOne({_id:remove}, {done:true}, function(err){
             if(err){
                 console.log(err);
             } else {
@@ -74,7 +78,7 @@ app.post('/removeToDo', function(req,res){
         // completed.push(remove);
     } else if(typeof remove === "object"){
         for(var i=0; i<remove.length; i++){
-            ToDo.updateOne({item:remove[i]}, {done:true}, function(err){
+            ToDo.updateOne({_id:remove[i]}, {done:true}, function(err){
                 if(err){
                     console.log(err);
                 } else {
@@ -91,20 +95,31 @@ app.post('/removeToDo', function(req,res){
     
 })
 
-
+//delete method
 app.post('/deleteToDo', function(req,res){
     const deleteTask = req.body.delete;
   
     if(typeof deleteTask === 'string'){
-        completed.splice( completed.indexOf(deleteTask),1);
-        
+        //completed.splice( completed.indexOf(deleteTask),1);
+        ToDo.deleteOne({_id:deleteTask}, function(err){
+            if(err){
+                console.log(err);
+            } 
+            res.redirect('/')
+        })
     } else if(typeof deleteTask === "object"){
         for(var i=0; i<deleteTask.length; i++){
-            completed.splice( completed.indexOf(deleteTask[i]),1);
-            
+            //completed.splice( completed.indexOf(deleteTask[i]),1);
+            ToDo.deleteOne({_id:deleteTask[i]}, function(err){
+                if(err){
+                    console.log(err);
+                } 
+                
+            })
         }
+        res.redirect('/')
     }
-    res.redirect('/')
+   
 })
 
 app.listen(3000, function(){
