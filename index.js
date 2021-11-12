@@ -132,5 +132,5 @@ app.get('/zip', function(request, response){
 });
 
 app.post('/zip', function(req,res){
-    res.send("hello")
+    res.redirect('/zip');
 });
