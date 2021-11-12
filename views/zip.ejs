@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>
+            To-do
+        </title>
+        <link href="/styles.css" rel="stylesheet">
+    </head>
+    <body>
+        <h1>
+            Select a country and enter a zip code
+        </h1>
+        <form action="/zip" method="POST">
+            <select>
+                <option selected disabled>--Select City--</option>
+                <option>Australia</option>
+                <option>Bangladesh</option>
+                <option>Canada</option>
+                <option>Germany</option>
+                <option>Spain</option>
+                <option>Greenland</option>
+                <option>India</option>
+                <option>Japan</option>
+                <option>Sri Lanka</option>
+                <option>United States</option>
+            </select>
+            <input type="number" name="zipcode" placeholder="ZipCode" maxlength="8">
+            <button formaction="/zip" type="submit">
+                Submit
+            </button>
+        </form>
+    </body>
+</html>

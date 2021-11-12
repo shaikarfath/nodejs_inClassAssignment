@@ -1,5 +1,6 @@
 let express = require('express');
 let bodyParser = require('body-parser');
+//let nodefetch = require('node-fetch');
 let mongoose = require('mongoose');
 const ToDo = require('./models/todomodel');
 
@@ -125,3 +126,11 @@ app.post('/deleteToDo', function(req,res){
 app.listen(3000, function(){
     console.log('App is running on port 3000!')
 })
+
+app.get('/zip', function(request, response){
+    response.render('zip');
+});
+
+app.post('/zip', function(req,res){
+    res.send("hello")
+});
