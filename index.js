@@ -21,6 +21,7 @@ db.on('error', console.error.bind(console, 'MongoDB Connection error:  '))
 let tasks = [];
 let completed = [];
 
+
 // fetch method
 app.get('/', function(request, response){
     ToDo.find(function(err, todo){
@@ -128,17 +129,23 @@ app.listen(3000, function(){
 })
 
 
-let zipdate = null
+let zipdata = null
 const axios = require('axios').default;
 
 
 
 app.get('/zip', function(request, response){
-    response.render('zip');
+    response.render('zip', {zipdata : zipdata});
 });
 
 app.post('/zip', function(req,res){
-    axios.get('http://api.zippopotam.us/')
+    
+    axios.get('http://api.zippopotam.us/', {
+        params: {
+            country: req.body.country,
+            zipcode: req.body.zipcode
+        }
+    })
     .then(function(response){
         console.log(response);
         zipdata = response
