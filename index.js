@@ -127,10 +127,24 @@ app.listen(3000, function(){
     console.log('App is running on port 3000!')
 })
 
+
+let zipdate = null
+const axios = require('axios').default;
+
+
+
 app.get('/zip', function(request, response){
     response.render('zip');
 });
 
 app.post('/zip', function(req,res){
+    axios.get('http://api.zippopotam.us/')
+    .then(function(response){
+        console.log(response);
+        zipdata = response
+    })
+    .catch(function(error){
+        console.log(error);
+    })
     res.redirect('/zip');
 });
