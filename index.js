@@ -142,8 +142,9 @@ app.post('/zip', function(req,res){
     
     axios.get(`http://api.zippopotam.us/${req.body.country}/${req.body.zipcode}`)
     .then(function(response){
-        console.log(response);
         zipdata = response.data
+        console.log(zipdata);
+        
         res.redirect('/zip');
     })
     .catch(function(error){
