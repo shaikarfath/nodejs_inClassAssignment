@@ -29,6 +29,14 @@
             </button>
         </form>
         <h1>Here is the Information:</h1>
-        <p><%= zipdata %></p>
+        <% if (zipdata) { %>
+            <%= zipdata.post code %>
+            <h2><%= zipdata.country %></h2>
+            <%= zipdata.longitude %>
+            <%= zipdata.latitude %>
+        % } %>
+        <% } else { %>
+            <h3>There are no information found</h3>>
+        <% } %>
     </body>
 </html>
