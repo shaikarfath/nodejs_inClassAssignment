@@ -143,10 +143,12 @@ app.post('/zip', function(req,res){
     axios.get(`http://api.zippopotam.us/${req.body.country}/${req.body.zipcode}`)
     .then(function(response){
         console.log(response);
-        zipdata = response
+        zipdata = response.data
+        res.redirect('/zip');
     })
     .catch(function(error){
         console.log(error);
+        res.redirect('/zip');
     })
-    res.redirect('/zip');
+    
 });
