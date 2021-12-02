@@ -3,9 +3,14 @@
         <title>
             To-do
         </title>
-        <link href="../static/css/styles.css" rel="stylesheet"/>
+        <%- include("static/styles.ejs"); %>
+        <nav class="nav">
+            <a class="nav-link" href="/">TODO</a>
+            <a class="nav-link" href="/zip">ZIP</a>
+          </nav>
     </head>
     <body>
+        <div class="main">
         <h1>
             Select a country and enter a zip code
         </h1>
@@ -31,7 +36,11 @@
         <h1>Here is the Information:</h1>
         <% if (zipdata != null) { %>
             <h1><%= zipdata.country %></h1>
+            <h1><%= zipdata.places.state %></h1>
+            <h1><%= zipdata.places.longitude %></h1>
+            <h1><%= zipdata.places.latitude %></h1>
+            
         <% } %>
-        
+    </div>
     </body>
 </html>
